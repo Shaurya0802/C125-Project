@@ -3,15 +3,19 @@ from classifier import get_prediction
 
 app = Flask(__name__)
 
-@app.route("/predict_alphabet", methods=["POST"])
+@app.route('/')
 
-def predict_data():
-    image = request.files.get("alphabet")
+def index():
+    return 'Welcome To The Home Page'
+
+@app.route('/predict', methods=['POST'])
+
+def predict():
+    image = request.files.get("letter")
     prediction = get_prediction(image)
-
     return jsonify({
         "prediction": prediction
     }), 200
-
-if __name__ == "__main__":
+    
+if __name__ == '__main__':
     app.run(debug=True)
